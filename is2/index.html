@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingeniería de Sistemas | Universidad de la Amazonia - Propuesta de Vanguardia</title>
+
+  <!-- Google Fonts: Syne (display premium), Plus Jakarta Sans (cuerpo) y JetBrains Mono (código) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Iconos Lucide / Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    /* ========================================================
+       VARIABLES DE SISTEMA Y TEMA CYBER-LUXURY
+    ======================================================== */
+    :root {
+      --bg-deep: #060911;
+      --bg-surface: rgba(14, 20, 36, 0.7);
+      --bg-surface-hover: rgba(22, 32, 58, 0.85);
+      --card-border: rgba(0, 242, 254, 0.15);
+      --card-border-glow: rgba(0, 242, 254, 0.5);
+
+      --neon-cyan: #00f2fe;
+      --electric-blue: #4facfe;
+      --neon-emerald: #10b981;
+      --neon-purple: #8b5cf6;
+      --amazon-green: #00e676;
+
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Barra de progreso de lectura */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--electric-blue), var(--amazon-green));
+      z-index: 9999;
+      width: 0%;
+      box-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    /* Fondo animado Canvas de partículas */
+    #canvas-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.65;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    /* ========================================================
+       BARRA DE NAVEGACIÓN (Glassmorphism + Sticky)
+    ======================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(6, 9, 17, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      transition: all 0.3s ease;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--electric-blue));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #060911;
+      font-size: 1.3rem;
+      font-weight: 800;
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: 0.5px;
+    }
+
+    .brand-sub {
+      font-size: 0.72rem;
+      font-family: var(--font-code);
+      color: var(--neon-cyan);
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--neon-cyan);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--neon-cyan);
+      transition: width 0.3s ease;
+      box-shadow: 0 0 8px var(--neon-cyan);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-portal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: var(--font-code);
+      color: #060911;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--electric-blue));
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-portal:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(0, 242, 254, 0.6);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      font-size: 1.4rem;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* ========================================================
+       HERO SECTION (High Impact + Grid)
+    ======================================================== */
+    .hero {
+      padding: 90px 0 80px 0;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 16px;
+      border-radius: 30px;
+      background: rgba(0, 242, 254, 0.08);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      font-family: var(--font-code);
+      font-size: 0.8rem;
+      color: var(--neon-cyan);
+      margin-bottom: 24px;
+    }
+
+    .radar-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--amazon-green);
+      box-shadow: 0 0 10px var(--amazon-green);
+      animation: pulseGlow 2s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.5; }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: 3.4rem;
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 22px;
+    }
+
+    .gradient-word {
+      background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #00e676 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .hero-lead {
+      font-size: 1.12rem;
+      color: var(--text-muted);
+      margin-bottom: 35px;
+      max-width: 560px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary-tech {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 30px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #060911;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--electric-blue));
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(0, 242, 254, 0.35);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary-tech:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(0, 242, 254, 0.6);
+    }
+
+    .btn-secondary-tech {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 26px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary-tech:hover {
+      background: rgba(0, 242, 254, 0.08);
+      border-color: var(--neon-cyan);
+    }
+
+    /* Tarjeta Hero Visual con Efecto Holográfico */
+    .hero-visual {
+      position: relative;
+    }
+
+    .holo-frame {
+      position: relative;
+      border-radius: 20px;
+      padding: 10px;
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.25), rgba(139, 92, 246, 0.1), rgba(0, 230, 118, 0.25));
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 242, 254, 0.15);
+    }
+
+    .holo-img-box {
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .holo-img-box img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .holo-frame:hover .holo-img-box img {
+      transform: scale(1.04);
+    }
+
+    /* Floating Badges */
+    .float-badge {
+      position: absolute;
+      background: rgba(10, 15, 29, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      padding: 12px 18px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      animation: floatSmooth 4s ease-in-out infinite;
+    }
+
+    .badge-top {
+      top: -20px;
+      right: -15px;
+      animation-delay: 0s;
+    }
+
+    .badge-bottom {
+      bottom: -20px;
+      left: -15px;
+      animation-delay: 2s;
+    }
+
+    @keyframes floatSmooth {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .float-badge i {
+      font-size: 1.5rem;
+      color: var(--neon-cyan);
+    }
+
+    .float-badge span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      font-family: var(--font-code);
+    }
+
+    .float-badge strong {
+      font-size: 0.92rem;
+      color: var(--text-main);
+    }
+
+    /* ========================================================
+       BARRA DE CONTADORES ANIMADOS
+    ======================================================== */
+    .counters-section {
+      padding: 40px 0;
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+      background: rgba(8, 12, 22, 0.6);
+    }
+
+    .counters-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .counter-item {
+      text-align: center;
+      padding: 20px;
+      border-radius: 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--card-border);
+      transition: all 0.3s ease;
+    }
+
+    .counter-item:hover {
+      border-color: var(--neon-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0, 242, 254, 0.15);
+    }
+
+    .counter-num {
+      font-family: var(--font-code);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--neon-cyan);
+      margin-bottom: 6px;
+    }
+
+    .counter-label {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .counter-sub {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    /* ========================================================
+       PILARES TECNOLÓGICOS (CSS GRID + 3D CARDS)
+    ======================================================== */
+    .section-padding {
+      padding: 100px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px auto;
+    }
+
+    .tag-category {
+      font-family: var(--font-code);
+      font-size: 0.8rem;
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .section-head h2 {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-head p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .pillar-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--card-border-glow);
+      box-shadow: 0 15px 35px rgba(0, 242, 254, 0.2);
+    }
+
+    .pillar-img {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .pillar-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .pillar-card:hover .pillar-img img {
+      transform: scale(1.1);
+    }
+
+    .pillar-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(6, 9, 17, 0.85);
+      backdrop-filter: blur(8px);
+      font-family: var(--font-code);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      border: 1px solid var(--card-border);
+    }
+
+    .pillar-content {
+      padding: 28px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pillar-content h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .pillar-content p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 22px;
+      flex-grow: 1;
+    }
+
+    .tech-stack-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-tag {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: var(--font-code);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* ========================================================
+       RUTA DE APRENDIZAJE INTERACTIVA (CURRÍCULO DINÁMICO)
+    ======================================================== */
+    .curriculum-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+    }
+
+    .tab-pill {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-family: var(--font-code);
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .tab-pill.active, .tab-pill:hover {
+      background: linear-gradient(135deg, var(--neon-cyan), var(--electric-blue));
+      color: #060911;
+      font-weight: 700;
+      border-color: transparent;
+      box-shadow: 0 4px 20px rgba(0, 242, 254, 0.4);
+    }
+
+    .grid-subjects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .subject-card {
+      background: rgba(6, 9, 17, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 14px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .subject-card:hover {
+      border-color: var(--neon-cyan);
+      transform: translateY(-4px);
+      background: rgba(14, 20, 36, 0.9);
+    }
+
+    .subject-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-family: var(--font-code);
+      font-size: 0.72rem;
+      color: var(--neon-cyan);
+    }
+
+    .subject-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .subject-desc {
+      font-size: 0.84rem;
+      color: var(--text-dim);
+    }
+
+    /* ========================================================
+       MODAL DE ASIGNATURAS / DETALLES INTERACTIVOS
+    ======================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(6, 9, 17, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 5000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: #0e1424;
+      border: 1px solid var(--card-border-glow);
+      border-radius: 20px;
+      padding: 35px;
+      width: 90%;
+      max-width: 580px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 242, 254, 0.3);
+      transform: scale(0.92);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.open .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 15px;
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--neon-cyan);
+    }
+
+    .btn-close-modal {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .btn-close-modal:hover {
+      color: #ff4757;
+    }
+
+    .modal-body p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+    }
+
+    .modal-tags {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    /* ========================================================
+       IDENTIDAD Y NORMATIVA (ACORDEÓN INTELIGENTE + CARDS)
+    ======================================================== */
+    .identity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .identity-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 35px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .identity-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--electric-blue));
+    }
+
+    .id-icon {
+      font-size: 2.2rem;
+      color: var(--neon-cyan);
+      margin-bottom: 16px;
+    }
+
+    .identity-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      margin-bottom: 14px;
+    }
+
+    .identity-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Acordeón de Resoluciones y Documentos */
+    .legal-accordion {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .acc-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+
+    .acc-item:hover {
+      border-color: rgba(0, 242, 254, 0.4);
+    }
+
+    .acc-trigger {
+      width: 100%;
+      padding: 22px 28px;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.3s ease;
+    }
+
+    .acc-trigger:hover {
+      background: rgba(0, 242, 254, 0.03);
+    }
+
+    .acc-trigger i.chevron {
+      color: var(--neon-cyan);
+      transition: transform 0.3s ease;
+    }
+
+    .acc-trigger.active i.chevron {
+      transform: rotate(180deg);
+    }
+
+    .acc-drawer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      background: rgba(6, 9, 17, 0.4);
+    }
+
+    .acc-drawer-inner {
+      padding: 0 28px 24px 28px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .acc-drawer-inner p {
+      margin-top: 14px;
+    }
+
+    /* ========================================================
+       TERMINAL INTERACTIVA EN VIVO (JS MINI CONSOLA)
+    ======================================================== */
+    .terminal-section {
+      padding: 60px 0 100px 0;
+    }
+
+    .terminal-box {
+      max-width: 840px;
+      margin: 0 auto;
+      background: #050810;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 242, 254, 0.1);
+    }
+
+    .terminal-bar {
+      background: #0d121f;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .term-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot-term {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .d-red { background: #ff5f56; }
+    .d-yellow { background: #ffbd2e; }
+    .d-green { background: #27c93f; }
+
+    .term-title {
+      font-family: var(--font-code);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    .terminal-console {
+      padding: 24px;
+      font-family: var(--font-code);
+      font-size: 0.9rem;
+      color: #38bdf8;
+      min-height: 200px;
+    }
+
+    .term-line {
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .term-prompt {
+      color: var(--amazon-green);
+      margin-right: 8px;
+    }
+
+    .term-input-row {
+      display: flex;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .term-input {
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text-main);
+      font-family: var(--font-code);
+      font-size: 0.9rem;
+      flex-grow: 1;
+    }
+
+    /* ========================================================
+       FOOTER
+    ======================================================== */
+    .site-footer {
+      border-top: 1px solid var(--card-border);
+      padding: 60px 0 30px 0;
+      background: #04060c;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand h4 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      max-width: 380px;
+    }
+
+    .footer-col h5 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--neon-cyan);
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--neon-cyan);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+    }
+
+    /* ========================================================
+       RESPONSIVE DESIGN (Media Queries)
+    ======================================================== */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-lead {
+        margin: 0 auto 35px auto;
+      }
+      .hero-btns {
+        justify-content: center;
+      }
+      .hero-visual {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+      .grid-subjects {
+        grid-template-columns: 1fr 1fr;
+      }
+      .counters-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      .nav-links, .btn-portal {
+        display: none;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .identity-grid {
+        grid-template-columns: 1fr;
+      }
+      .grid-subjects {
+        grid-template-columns: 1fr;
+      }
+      .counters-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .badge-top, .badge-bottom {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de progreso superior -->
+  <div id="scroll-progress"></div>
+
+  <!-- Fondo interactivo con partículas -->
+  <canvas id="canvas-particles"></canvas>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#inicio" class="brand-logo">
+        <div class="brand-badge"><i class="bi bi-terminal"></i></div>
+        <div class="brand-text">
+          <span class="brand-title">UNIAMAZONIA</span>
+          <span class="brand-sub">&gt; INGENIERÍA_DE_SISTEMAS</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#metricas">Métricas</a></li>
+          <li><a href="#pilares">Campos Tech</a></li>
+          <li><a href="#malla">Plan de Estudios</a></li>
+          <li><a href="#identidad">Misión & Visión</a></li>
+          <li><a href="#terminal">CLI Interactivo</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#malla" class="btn-portal"><i class="bi bi-code-slash"></i> Explorar Malla</a>
+        <button class="menu-toggle" id="btn-toggle-menu"><i class="bi bi-list"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-left">
+        <div class="status-badge">
+          <span class="radar-dot"></span> SNIES: 52384 &bull; Acreditación de Alta Calidad
+        </div>
+
+        <h1>
+          Ingeniería de Sistemas<br>
+          <span class="gradient-word">del Futuro Digital</span>
+        </h1>
+
+        <p class="hero-lead">
+          Diseñamos soluciones computacionales de alta escala, arquitecturas cloud, ciberseguridad e Inteligencia Artificial para impulsar la transformación de la región Amazónica y el mundo.
+        </p>
+
+        <div class="hero-btns">
+          <a href="#malla" class="btn-primary-tech"><i class="bi bi-lightning-charge-fill"></i> Explorar Semestres</a>
+          <a href="#terminal" class="btn-secondary-tech"><i class="bi bi-terminal-fill"></i> Consola en Vivo</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="holo-frame">
+          <div class="holo-img-box">
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80" alt="Laboratorio de computación Uniamazonia">
+          </div>
+          <div class="float-badge badge-top">
+            <i class="bi bi-mortarboard-fill"></i>
+            <div>
+              <span>TÍTULO PROFESIONAL</span>
+              <strong>Ingeniero de Sistemas</strong>
+            </div>
+          </div>
+          <div class="float-badge badge-bottom">
+            <i class="bi bi-clock-history"></i>
+            <div>
+              <span>MODALIDAD Y JORNADA</span>
+              <strong>10 Semestres &bull; Diurna</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contadores / Ficha Rápida -->
+  <section id="metricas" class="counters-section">
+    <div class="container counters-grid">
+      <div class="counter-item">
+        <div class="counter-num" data-target="178">0</div>
+        <div class="counter-label">Créditos Académicos</div>
+        <div class="counter-sub">Formación completa e integral</div>
+      </div>
+
+      <div class="counter-item">
+        <div class="counter-num" data-target="10">0</div>
+        <div class="counter-label">Semestres Presenciales</div>
+        <div class="counter-sub">Campus Florencia, Caquetá</div>
+      </div>
+
+      <div class="counter-item">
+        <div class="counter-num" data-target="2004">0</div>
+        <div class="counter-label">Año de Creación</div>
+        <div class="counter-sub">Acuerdo 16 del Consejo Superior</div>
+      </div>
+
+      <div class="counter-item">
+        <div class="counter-num" data-target="1562">0</div>
+        <div class="counter-label">Registro Calificado</div>
+        <div class="counter-sub">Resolución MEN 16/02/2022</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pilares Tecnológicos -->
+  <section id="pilares" class="section-padding">
+    <div class="container">
+      <div class="section-head">
+        <span class="tag-category">// CAPACIDADES Y PROFUNDIZACIÓN</span>
+        <h2>Pilares de la Formación Profesional</h2>
+        <p>Preparamos ingenieros versátiles, adaptables a tecnologías emergentes y con sólida fundamentación científica.</p>
+      </div>
+
+      <div class="pillars-grid">
+        <!-- Tarjeta 1 -->
+        <div class="pillar-card">
+          <div class="pillar-img">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Software Engineering">
+            <span class="pillar-badge">SOFTWARE</span>
+          </div>
+          <div class="pillar-content">
+            <h3>Ingeniería de Software & Cloud</h3>
+            <p>Diseño de patrones arquitectónicos, desarrollo Full Stack, microservicios, bases de datos concurrentes y computación en la nube.</p>
+            <div class="tech-stack-list">
+              <span class="tech-tag">Java / Spring</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2 -->
+        <div class="pillar-card">
+          <div class="pillar-img">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="Networks & Cyber">
+            <span class="pillar-badge">INFRAESTRUCTURA</span>
+          </div>
+          <div class="pillar-content">
+            <h3>Redes, Ciberseguridad & IoT</h3>
+            <p>Enrutamiento avanzado, telemetría distribuida con microcontroladores ESP32, seguridad perimetral y administración de redes corporativas.</p>
+            <div class="tech-stack-list">
+              <span class="tech-tag">TCP/IP</span>
+              <span class="tech-tag">MikroTik</span>
+              <span class="tech-tag">Cisco CCNA</span>
+              <span class="tech-tag">IoT / Wokwi</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3 -->
+        <div class="pillar-card">
+          <div class="pillar-img">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="Data & AI">
+            <span class="pillar-badge">INTELIGENCIA ARTIFICIAL</span>
+          </div>
+          <div class="pillar-content">
+            <h3>Ciencia de Datos & Bio-Algoritmos</h3>
+            <p>Modelado matemático predictivo, optimización heurística mediante algoritmos genéticos y soluciones orientadas al contexto amazónico.</p>
+            <div class="tech-stack-list">
+              <span class="tech-tag">Machine Learning</span>
+              <span class="tech-tag">Algoritmos Genéticos</span>
+              <span class="tech-tag">Data Mining</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Malla Curricular Interactiva con Filtros Dinámicos -->
+  <section id="malla" class="section-padding" style="background: rgba(6, 9, 17, 0.4);">
+    <div class="container">
+      <div class="section-head">
+        <span class="tag-category">// PLAN DE ESTUDIOS (178 CRÉDITOS)</span>
+        <h2>Ruta Formativa Interactiva</h2>
+        <p>Haz clic en los filtros para explorar las materias clave según el nivel de avance académico.</p>
+      </div>
+
+      <div class="curriculum-box">
+        <div class="filter-tabs">
+          <button class="tab-pill active" data-cycle="all"><i class="bi bi-grid-fill"></i> Todo el Pensum</button>
+          <button class="tab-pill" data-cycle="basico"><i class="bi bi-1-circle"></i> Ciclo Básico (1° - 3°)</button>
+          <button class="tab-pill" data-cycle="profesional"><i class="bi bi-2-circle"></i> Profesional (4° - 7°)</button>
+          <button class="tab-pill" data-cycle="avanzado"><i class="bi bi-3-circle"></i> Especialización (8° - 10°)</button>
+        </div>
+
+        <div class="grid-subjects" id="subjects-container">
+          <!-- Asignaturas generadas dinámicamente con JavaScript -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Identidad y Fundamentos Institucionales -->
+  <section id="identidad" class="section-padding">
+    <div class="container">
+      <div class="section-head">
+        <span class="tag-category">// COMPROMISO CON LA REGIÓN</span>
+        <h2>Misión, Visión y Normativa Oficial</h2>
+        <p>Los cimientos institucionales avalados por el Ministerio de Educación Nacional.</p>
+      </div>
+
+      <div class="identity-grid">
+        <div class="identity-card">
+          <div class="id-icon"><i class="bi bi-compass-fill"></i></div>
+          <h3>Misión del Programa</h3>
+          <p>
+            El programa académico Ingeniería de Sistemas de la Universidad de la Amazonia, asume como encargo social la formación de profesionales íntegros, con capacidad para crear, innovar, formular y solucionar problemáticas organizacionales y productivas, apoyados en el desarrollo de sistemas de información soportados en las diferentes tecnologías informáticas, con el propósito de contribuir al desarrollo social, económico y tecnológico de la región amazónica y del país.
+          </p>
+        </div>
+
+        <div class="identity-card">
+          <div class="id-icon"><i class="bi bi-eye-fill"></i></div>
+          <h3>Visión del Programa</h3>
+          <p>
+            Ingeniería de Sistemas será un programa académico en permanente acreditación académica y social, líder en la formación integral de profesionales, competentes en el campo académico, investigativo y humanístico; comprometidos con el desarrollo tecnológico de la región amazónica y del país apoyados en tecnologías de información.
+          </p>
+        </div>
+      </div>
+
+      <!-- Acordeón de Resoluciones Oficiales -->
+      <div class="legal-accordion">
+        <div class="acc-item">
+          <button class="acc-trigger">
+            <span><i class="bi bi-shield-lock-fill text-info me-2"></i> Propósito de Formación Integral</span>
+            <i class="bi bi-chevron-down chevron"></i>
+          </button>
+          <div class="acc-drawer">
+            <div class="acc-drawer-inner">
+              <p>Desarrollar procesos de formación integral abordando conocimientos propios de las ciencias básicas, ingeniería, tecnologías de la información, investigación y socio-humanística para incidir positivamente en la Amazonia.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger">
+            <span><i class="bi bi-file-earmark-check-fill text-success me-2"></i> Registro Calificado y Normativa Legal</span>
+            <i class="bi bi-chevron-down chevron"></i>
+          </button>
+          <div class="acc-drawer">
+            <div class="acc-drawer-inner">
+              <p><strong>Resolución de Registro Calificado:</strong> No. 001562 del 16 de febrero de 2022 emitida por el MEN.</p>
+              <p><strong>Acuerdo de Creación:</strong> Acuerdo 16 del 26 de agosto de 2004 por el Consejo Superior Universitario.</p>
+              <p><strong>Código SNIES:</strong> 52384 | <strong>Lugar:</strong> Florencia - Caquetá, Campus Florencia.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger">
+            <span><i class="bi bi-person-workspace text-warning me-2"></i> Perfil del Egresado</span>
+            <i class="bi bi-chevron-down chevron"></i>
+          </button>
+          <div class="acc-drawer">
+            <div class="acc-drawer-inner">
+              <p>Profesional que comprende las dinámicas del entorno reconociendo responsabilidades éticas, jurídicas y sociales; autónomo en aprendizaje constante e innovador en metodologías de desarrollo tecnológico de avanzada.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Terminal Interactiva de Simulación (CLI en vivo) -->
+  <section id="terminal" class="terminal-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="tag-category">// SISTEMA INTERACTIVO</span>
+        <h2>Terminal CLI Uniamazonia</h2>
+        <p>Prueba los comandos de consola para consultar datos rápidos del programa.</p>
+      </div>
+
+      <div class="terminal-box">
+        <div class="terminal-bar">
+          <div class="term-dots">
+            <span class="dot-term d-red"></span>
+            <span class="dot-term d-yellow"></span>
+            <span class="dot-term d-green"></span>
+          </div>
+          <span class="term-title">bash &mdash; uniamazonia@sistemas: ~</span>
+          <span style="font-family: var(--font-code); font-size: 0.7rem; color: var(--neon-cyan);">v2.4.0</span>
+        </div>
+
+        <div class="terminal-console" id="term-output">
+          <div class="term-line">Bienvenido a la consola del Programa de Ingeniería de Sistemas.</div>
+          <div class="term-line">Escribe <span style="color: #ffde59; font-weight: bold;">help</span> para listar los comandos disponibles.</div>
+        </div>
+
+        <div class="term-input-row" style="padding: 0 24px 20px 24px;">
+          <span class="term-prompt">uniamazonia@is:~$</span>
+          <input type="text" id="cli-input" class="term-input" placeholder="escribe 'help', 'info', 'pensum' o 'clear'..." autocomplete="off">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Emergente para Detalle de Asignaturas -->
+  <div class="modal-overlay" id="subject-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span id="modal-cycle" style="font-family: var(--font-code); font-size: 0.75rem; color: var(--neon-cyan);">CICLO</span>
+          <h3 class="modal-title" id="modal-name">Nombre de la Asignatura</h3>
+        </div>
+        <button class="btn-close-modal" id="btn-close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="modal-desc">Descripción detallada de la asignatura.</p>
+        <p><strong>Competencias clave:</strong> <span id="modal-skills">Desarrollo algorítmico, lógica estructurada.</span></p>
+        <div class="modal-tags" id="modal-tags"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Futurista -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h4>&lt;IS.UNIAMAZONIA /&gt;</h4>
+        <p>Programa de Ingeniería de Sistemas &bull; Facultad de Ingeniería. Comprometidos con el desarrollo tecnológico, científico y social de la Amazonia Colombiana.</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Navegación</h5>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#metricas">Métricas Institucionales</a></li>
+          <li><a href="#pilares">Campos de Acción</a></li>
+          <li><a href="#malla">Plan de Estudios</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Sede Florencia</h5>
+        <ul>
+          <li><a href="#">Campus Porvenir</a></li>
+          <li><a href="#">Facultad de Ingeniería</a></li>
+          <li><a href="#">SNIES 52384</a></li>
+          <li><a href="#">Florencia, Caquetá</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>&copy; 2026 Propuesta de Rediseño de Vanguardia &bull; Ingeniería de Sistemas</span>
+      <span style="font-family: var(--font-code);">Diseñado con HTML5 Semántico, CSS Grid & JavaScript</span>
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       SCRIPTS INTERACTIVOS (JS MODERNO Y EXPLICABLE)
+  ======================================================== -->
+  <script>
+    /* 1. BARRA DE PROGRESO DE SCROLL */
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('scroll-progress').style.width = scrolled + '%';
+    });
+
+    /* 2. FONDO DE PARTÍCULAS DINÁMICAS EN CANVAS */
+    const canvas = document.getElementById('canvas-particles');
+    const ctx = canvas.getContext('2d');
+    let particlesArray = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.6;
+        this.speedY = (Math.random() - 0.5) * 0.6;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.fillStyle = 'rgba(0, 242, 254, 0.4)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particlesArray = [];
+      const num = Math.min(window.innerWidth / 15, 60);
+      for (let i = 0; i < num; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    initParticles();
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+        for (let j = i; j < particlesArray.length; j++) {
+          const dx = particlesArray[i].x - particlesArray[j].x;
+          const dy = particlesArray[i].y - particlesArray[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(0, 242, 254, ${0.15 - dist / 800})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    /* 3. CONTADORES NUMÉRICOS ANIMADOS */
+    let countersStarted = false;
+    const counters = document.querySelectorAll('.counter-num');
+    
+    function startCounters() {
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        let count = 0;
+        const speed = target / 50;
+        const updateCount = () => {
+          count += speed;
+          if (count < target) {
+            counter.innerText = Math.ceil(count);
+            setTimeout(updateCount, 25);
+          } else {
+            counter.innerText = target;
+          }
+        };
+        updateCount();
+      });
+    }
+
+    window.addEventListener('scroll', () => {
+      const metricasSec = document.getElementById('metricas');
+      if (metricasSec) {
+        const rect = metricasSec.getBoundingClientRect();
+        if (rect.top <= window.innerHeight && !countersStarted) {
+          countersStarted = true;
+          startCounters();
+        }
+      }
+    });
+
+    /* 4. BASE DE DATOS DE ASIGNATURAS Y GENERACIÓN DINÁMICA */
+    const materias = [
+      { id: 1, cycle: 'basico', name: 'Algoritmos y Programación', sem: 'Semestre 1', credits: 4, desc: 'Lógica algorítmica, estructuras de control y solución computacional de problemas.', skills: 'Pensamiento lógico, pseudocódigo, C++/Java.' },
+      { id: 2, cycle: 'basico', name: 'Cálculo Diferencial e Integral', sem: 'Semestre 2', credits: 4, desc: 'Modelado matemático de cambios continuos y optimización de funciones.', skills: 'Modelado analítico, derivadas e integrales.' },
+      { id: 3, cycle: 'basico', name: 'Programación Orientada a Objetos', sem: 'Semestre 3', credits: 3, desc: 'Paradigmas de clases, herencia, encapsulamiento, polimorfismo y patrones.', skills: 'Java, POO, modularidad, buenas prácticas.' },
+      { id: 4, cycle: 'profesional', name: 'Estructuras de Datos y Algoritmos', sem: 'Semestre 4', credits: 3, desc: 'Listas enlazadas, árboles binarios, grafos y complejidad algorítmica Big-O.', skills: 'Árboles AVL, optimización de memoria.' },
+      { id: 5, cycle: 'profesional', name: 'Bases de Datos Relacionales y NoSQL', sem: 'Semestre 5', credits: 4, desc: 'Diseño entidad-relación, SQL avanzado, normalización y motores distribuidos.', skills: 'PostgreSQL, MongoDB, transacciones ACID.' },
+      { id: 6, cycle: 'profesional', name: 'Redes y Protocolos de Comunicación', sem: 'Semestre 6', credits: 4, desc: 'Modelo OSI, TCP/IP, enrutamiento, subnetting y conmutación de paquetes.', skills: 'Cisco Packet Tracer, análisis Wireshark.' },
+      { id: 7, cycle: 'profesional', name: 'Ingeniería de Software & DevOps', sem: 'Semestre 7', credits: 4, desc: 'Metodologías ágiles Scrum, integración continua CI/CD y diseño arquitectónico.', skills: 'Docker, Git, pruebas unitarias, Scrum.' },
+      { id: 8, cycle: 'avanzado', name: 'Seguridad Informática y Criptografía', sem: 'Semestre 8', credits: 3, desc: 'Auditoría perimetral, cifrado asimétrico, gestión de vulnerabilidades y ética hacker.', skills: 'Hardening, firewalls, OWASP Top 10.' },
+      { id: 9, cycle: 'avanzado', name: 'Inteligencia Artificial y Machine Learning', sem: 'Semestre 9', credits: 3, desc: 'Redes neuronales, algoritmos genéticos y modelos predictivos aplicados a la región.', skills: 'Python, Scikit-Learn, optimización evolutiva.' },
+      { id: 10, cycle: 'avanzado', name: 'Proyecto de Grado / Pasantía', sem: 'Semestre 10', credits: 6, desc: 'Desarrollo de solución tecnológica integral o pasantía empresarial certificada.', skills: 'Gestión TI, sustentación y liderazgo de proyectos.' }
+    ];
+
+    const subjectsContainer = document.getElementById('subjects-container');
+    const modal = document.getElementById('subject-modal');
+    const modalName = document.getElementById('modal-name');
+    const modalCycle = document.getElementById('modal-cycle');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalSkills = document.getElementById('modal-skills');
+    const modalTags = document.getElementById('modal-tags');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+
+    function renderSubjects(filter) {
+      subjectsContainer.innerHTML = '';
+      const filtered = filter === 'all' ? materias : materias.filter(m => m.cycle === filter);
+      
+      filtered.forEach(m => {
+        const card = document.createElement('div');
+        card.className = 'subject-card';
+        card.innerHTML = `
+          <div class="subject-meta">
+            <span>${m.sem}</span>
+            <span>${m.credits} CRÉDITOS</span>
+          </div>
+          <h4 class="subject-title">${m.name}</h4>
+          <p class="subject-desc">${m.desc.substring(0, 75)}...</p>
+        `;
+        card.addEventListener('click', () => openModal(m));
+        subjectsContainer.appendChild(card);
+      });
+    }
+
+    function openModal(item) {
+      modalCycle.innerText = item.sem.toUpperCase();
+      modalName.innerText = item.name;
+      modalDesc.innerText = item.desc;
+      modalSkills.innerText = item.skills;
+      modalTags.innerHTML = `
+        <span class="tech-tag">${item.credits} Créditos</span>
+        <span class="tech-tag">Ciclo ${item.cycle.toUpperCase()}</span>
+      `;
+      modal.classList.add('open');
+    }
+
+    btnCloseModal.addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('open');
+    });
+
+    // Pestañas de filtrado
+    document.querySelectorAll('.tab-pill').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderSubjects(this.getAttribute('data-cycle'));
+      });
+    });
+
+    renderSubjects('all');
+
+    /* 5. ACORDEÓN INSTITUCIONAL */
+    document.querySelectorAll('.acc-trigger').forEach(trigger => {
+      trigger.addEventListener('click', function() {
+        const drawer = this.nextElementSibling;
+        const isOpen = this.classList.contains('active');
+
+        // Cerrar otros acordeones
+        document.querySelectorAll('.acc-trigger').forEach(t => {
+          t.classList.remove('active');
+          t.nextElementSibling.style.maxHeight = null;
+        });
+
+        if (!isOpen) {
+          this.classList.add('active');
+          drawer.style.maxHeight = drawer.scrollHeight + 'px';
+        }
+      });
+    });
+
+    /* 6. CONSOLA CLI INTERACTIVA */
+    const cliInput = document.getElementById('cli-input');
+    const termOutput = document.getElementById('term-output');
+
+    const commands = {
+      'help': 'Comandos disponibles: info, snies, pensum, mision, vision, creditos, clear',
+      'info': 'Programa: Ingeniería de Sistemas | U. de la Amazonia | Presencial Diurna | Florencia, Caquetá.',
+      'snies': 'Código SNIES: 52384 | Res. MEN 001562 del 16/02/2022',
+      'pensum': 'Total: 10 Semestres, 178 Créditos Académicos integrados en 3 ciclos.',
+      'mision': 'Formar profesionales íntegros e innovadores para resolver problemáticas organizacionales y tecnológicas.',
+      'vision': 'Ser líderes en acreditación y referentes tecnológicos en la Amazonia y Colombia.',
+      'creditos': 'Total de 178 créditos distribuidos en ciencias básicas, ingeniería, socio-humanística e investigación.',
+      'clear': 'CLEAR_CMD'
+    };
+
+    cliInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const query = this.value.trim().toLowerCase();
+        if (!query) return;
+
+        const cmdLine = document.createElement('div');
+        cmdLine.className = 'term-line';
+        cmdLine.innerHTML = `<span class="term-prompt">uniamazonia@is:~$</span> ${query}`;
+        termOutput.appendChild(cmdLine);
+
+        if (query === 'clear') {
+          termOutput.innerHTML = '';
+        } else if (commands[query]) {
+          const resp = document.createElement('div');
+          resp.className = 'term-line';
+          resp.style.color = '#a7f3d0';
+          resp.innerText = commands[query];
+          termOutput.appendChild(resp);
+        } else {
+          const resp = document.createElement('div');
+          resp.className = 'term-line';
+          resp.style.color = '#f87171';
+          resp.innerText = `Comando no reconocido: "${query}". Escribe 'help' para ayuda.`;
+          termOutput.appendChild(resp);
+        }
+
+        this.value = '';
+        termOutput.scrollTop = termOutput.scrollHeight;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingeniería de Sistemas | Universidad de la Amazonia</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Iconos de Bootstrap vía CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Enlace a tu hoja de estilos CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Barra de Navegación Sticky -->
+  <header class="navbar">
+    <div class="container nav-wrap">
+      <a href="#inicio" class="brand">
+        <div class="brand-icon"><i class="bi bi-terminal"></i></div>
+        <div class="brand-info">
+          <span class="brand-name">UNIAMAZONIA</span>
+          <span class="brand-tag">&gt; INGENIERÍA_DE_SISTEMAS</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#metricas">Ficha Técnica</a></li>
+          <li><a href="#pilares">Campos Tech</a></li>
+          <li><a href="#malla">Plan de Estudios</a></li>
+          <li><a href="#identidad">Misión y Visión</a></li>
+        </ul>
+      </nav>
+
+      <a href="#malla" class="btn-nav"><i class="bi bi-mortarboard-fill"></i> Ver Pensum</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="hero">
+    <!-- Sello Dorado de Acreditación de Alta Calidad -->
+<div class="sello-calidad">
+  <div class="sello-icono">
+    <i class="bi bi-patch-check-fill"></i>
+  </div>
+  <div class="sello-textos">
+    <span class="sello-titulo">ACREDITADA</span>
+    <span class="sello-sub">EN ALTA CALIDAD</span>
+  </div>
+</div>
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <div class="badge-status">
+          <span class="dot-radar"></span> SNIES: 52384 &bull; Acuerdo 44 de 2020 C.A.
+        </div>
+
+        <h1>
+          Ingeniería de Sistemas<br>
+          <span class="gradient-tech">del Futuro Digital</span>
+        </h1>
+
+        <p>
+          Formamos profesionales integrales orientados al avance tecnológico, científico y social de la región Amazónica y del país, mediante el desarrollo de software, inteligencia computacional e infraestructuras seguras.
+        </p>
+
+        <div class="hero-btns">
+          <a href="#malla" class="btn-main"><i class="bi bi-diagram-3-fill"></i> Explorar 10 Semestres</a>
+          <a href="#identidad" class="btn-outline"><i class="bi bi-person-badge"></i> Perfil del Egresado</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-img-card">
+          <div class="hero-img-wrap">
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80" alt="Laboratorio tecnológico Uniamazonia">
+          </div>
+          <div class="badge-float">
+            <i class="bi bi-mortarboard-fill"></i>
+            <div>
+              <span>TÍTULO PROFESIONAL OFICIAL</span>
+              <strong>Ingeniero de Sistemas</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ficha Técnica con Flexbox -->
+  <section id="metricas" class="section-stats">
+    <div class="container stats-flex">
+      
+      <div class="stat-card">
+        <i class="bi bi-clock-history"></i>
+        <div class="stat-value">10</div>
+        <div class="stat-label">Semestres Académicos</div>
+        <div class="stat-sub">Modalidad Presencial &bull; Diurna</div>
+      </div>
+
+      <div class="stat-card">
+        <i class="bi bi-journal-bookmark-fill"></i>
+        <div class="stat-value">178</div>
+        <div class="stat-label">Créditos Totales</div>
+        <div class="stat-sub">Incluye 10 créditos de Opción de Grado</div>
+      </div>
+
+      <div class="stat-card">
+        <i class="bi bi-file-earmark-check-fill"></i>
+        <div class="stat-value">Ac. 44</div>
+        <div class="stat-label">Plan de Estudios 2020</div>
+        <div class="stat-sub">Aprobado el 02 de diciembre de 2020</div>
+      </div>
+
+      <div class="stat-card">
+        <i class="bi bi-geo-alt-fill"></i>
+        <div class="stat-value">Florencia</div>
+        <div class="stat-label">Campus Porvenir</div>
+        <div class="stat-sub">Universidad de la Amazonia</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Pilares Tecnológicos con CSS Grid -->
+  <section id="pilares" class="section-wrap">
+    <div class="container">
+      <div class="section-head">
+        <span class="tag-neon">// CAMPOS DE FORMACIÓN</span>
+        <h2>Líneas Formativas del Currículo</h2>
+        <p>Ejes fundamentales aprobados en el Acuerdo No. 44 para la formación del Ingeniero de Sistemas.</p>
+      </div>
+
+      <div class="grid-pillars">
+        
+        <article class="pillar-box">
+          <div class="pillar-img">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Ingeniería de Software">
+          </div>
+          <div class="pillar-body">
+            <span class="pill-tag">INGENIERÍA DE SOFTWARE</span>
+            <h3>Desarrollo y Sistemas de Información</h3>
+            <p>Desde Lógica y Algoritmos, Estructuras de Datos, hasta Ingeniería de Software I, II, III, Programación Web y Móvil.</p>
+            <div class="tags-list">
+              <span>Lógica I y II</span>
+              <span>Web & Móvil</span>
+              <span>Bases de Datos</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pillar-box">
+          <div class="pillar-img">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="Redes y Comunicaciones">
+          </div>
+          <div class="pillar-body">
+            <span class="pill-tag">INFRAESTRUCTURA TI</span>
+            <h3>Redes, Sistemas Operativos y Gestión</h3>
+            <p>Administración de Sistemas Operativos, Redes Informáticas I y II, y Planeación Estratégica de Sistemas de Información (PESI).</p>
+            <div class="tags-list">
+              <span>Redes I y II</span>
+              <span>Sistemas Operativos</span>
+              <span>PESI</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pillar-box">
+          <div class="pillar-img">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="Inteligencia Computacional">
+          </div>
+          <div class="pillar-body">
+            <span class="pill-tag">CIENCIA APLICADA</span>
+            <h3>Inteligencia Computacional e Investigación</h3>
+            <p>Inteligencia Computacional I y II, Modelos Determinísticos, Metodología de la Investigación y Escritura Científica.</p>
+            <div class="tags-list">
+              <span>Inteligencia I y II</span>
+              <span>Modelos Det.</span>
+              <span>Electivas I - IV</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Plan de Estudios Oficial (Pestañas 100% CSS puro para los 10 Semestres) -->
+  <section id="malla" class="section-wrap" style="background: rgba(0, 45, 77, 0.03);">
+    <div class="container">
+      <div class="section-head">
+        <span class="tag-neon">// PENSUM OFICIAL (ACUERDO 44 DE 2020)</span>
+        <h2>Plan de Estudios por Ciclos Académicos</h2>
+        <p>Distribución de los 178 créditos en los 10 semestres del programa de Ingeniería de Sistemas.</p>
+      </div>
+
+      <div class="tabs-wrapper">
+        <!-- Radio buttons para seleccionar ciclo -->
+        <input type="radio" name="tab-curriculum" id="tab-1" class="tab-radio" checked>
+        <input type="radio" name="tab-curriculum" id="tab-2" class="tab-radio">
+        <input type="radio" name="tab-curriculum" id="tab-3" class="tab-radio">
+
+        <!-- Selector visual de pestañas -->
+        <div class="tab-nav">
+          <label for="tab-1" class="tab-label"><i class="bi bi-1-circle-fill"></i> Semestres I - III (Fundamentación)</label>
+          <label for="tab-2" class="tab-label"><i class="bi bi-2-circle-fill"></i> Semestres IV - VII (Ciclo Profesional)</label>
+          <label for="tab-3" class="tab-label"><i class="bi bi-3-circle-fill"></i> Semestres VIII - X (Profundización)</label>
+        </div>
+
+        <!-- Paneles de materias -->
+        <div class="tab-content">
+          
+          <!-- Pestaña 1: Semestres I al III -->
+          <div id="content-1" class="tab-panel">
+            <h3>Semestres I, II y III: Ciencias Básicas y Algoritmos</h3>
+            <p>52 créditos académicos distribuidos en formación básica de ingeniería, socio-humanística y ciencias exactas.</p>
+            
+            <div class="chips-grid">
+              <!-- Semestre 1 -->
+              <div class="chip-item"><i class="bi bi-journal-code"></i><strong>Sem I: Comunicación (2 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-activity"></i><strong>Sem I: Deporte y Cultura (2 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-calculator"></i><strong>Sem I: Matemáticas I (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-lightning-charge"></i><strong>Sem I: Física I (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-flower1"></i><strong>Sem I: Biología General (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-compass"></i><strong>Sem I: Intro. a la Ingeniería (2 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-code-slash"></i><strong>Sem I: Lógica y Algoritmos I (3 CR)</strong></div>
+              
+              <!-- Semestre 2 -->
+              <div class="chip-item"><i class="bi bi-bank"></i><strong>Sem II: Constitución y Democracia (2 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-calculator"></i><strong>Sem II: Matemáticas II (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-lightning-charge"></i><strong>Sem II: Física II (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-droplet"></i><strong>Sem II: Química I (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-code-slash"></i><strong>Sem II: Lógica y Algoritmos II (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-diagram-2"></i><strong>Sem II: Teoría General de Sistemas (3 CR)</strong></div>
+
+              <!-- Semestre 3 -->
+              <div class="chip-item"><i class="bi bi-translate"></i><strong>Sem III: Idioma Extranjero I (2 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-grid-3x3"></i><strong>Sem III: Álgebra Lineal (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-boxes"></i><strong>Sem III: Matemáticas Discreta (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-diagram-3"></i><strong>Sem III: Análisis de Sistemas (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-folder-symlink"></i><strong>Sem III: Estructuras de Datos I (4 CR)</strong></div>
+            </div>
+          </div>
+
+          <!-- Pestaña 2: Semestres IV al VII -->
+          <div id="content-2" class="tab-panel">
+            <h3>Semestres IV, V, VI y VII: Ingeniería Aplicada y Redes</h3>
+            <p>72 créditos académicos dedicados a construcción de software, modelos matemáticos, bases de datos y telecomunicaciones.</p>
+            
+            <div class="chips-grid">
+              <!-- Semestre 4 -->
+              <div class="chip-item"><i class="bi bi-infinity"></i><strong>Sem IV: Ecuaciones Diferenciales (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-bar-chart"></i><strong>Sem IV: Estadística para Ingeniería (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-laptop"></i><strong>Sem IV: Ingeniería de Software I (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-window-stack"></i><strong>Sem IV: Sistemas Operativos (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-folder2-open"></i><strong>Sem IV: Estructuras de Datos II (4 CR)</strong></div>
+
+              <!-- Semestre 5 -->
+              <div class="chip-item"><i class="bi bi-translate"></i><strong>Sem V: Idioma Extranjero II (2 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-cpu"></i><strong>Sem V: Métodos Numéricos (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-laptop"></i><strong>Sem V: Ingeniería de Software II (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-globe"></i><strong>Sem V: Programación Web (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-database"></i><strong>Sem V: Diseño de Base de Datos (4 CR)</strong></div>
+
+              <!-- Semestre 6 -->
+              <div class="chip-item"><i class="bi bi-book"></i><strong>Sem VI: Filosofía e Historia de la Ciencia (2 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-pie-chart"></i><strong>Sem VI: Modelos Determinísticos (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-laptop"></i><strong>Sem VI: Ingeniería de Software III (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-phone"></i><strong>Sem VI: Programación Móvil (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-hdd-network"></i><strong>Sem VI: Redes Informáticas I (4 CR)</strong></div>
+
+              <!-- Semestre 7 -->
+              <div class="chip-item"><i class="bi bi-search"></i><strong>Sem VII: Metodología Investigación I (2 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-kanban"></i><strong>Sem VII: Proyectos Software (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-robot"></i><strong>Sem VII: Inteligencia Computacional I (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-hdd-network-fill"></i><strong>Sem VII: Redes Informáticas II (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-database-check"></i><strong>Sem VII: Admón. de Base de Datos (4 CR)</strong></div>
+            </div>
+          </div>
+
+          <!-- Pestaña 3: Semestres VIII al X -->
+          <div id="content-3" class="tab-panel">
+            <h3>Semestres VIII, IX y X: Profundización y Opción de Grado</h3>
+            <p>54 créditos académicos orientados al emprendimiento, inteligencia avanzada, electivas de profundización y titulación.</p>
+            
+            <div class="chips-grid">
+              <!-- Semestre 8 -->
+              <div class="chip-item"><i class="bi bi-people"></i><strong>Sem VIII: Desarrollo Humano (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-search"></i><strong>Sem VIII: Metodología Investigación II (2 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-briefcase"></i><strong>Sem VIII: PESI (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-robot"></i><strong>Sem VIII: Inteligencia Computacional II (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-lightbulb"></i><strong>Sem VIII: Emprendimiento e Innovación (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-shield-check"></i><strong>Sem VIII: Ética (2 CR)</strong></div>
+
+              <!-- Semestre 9 -->
+              <div class="chip-item"><i class="bi bi-tree"></i><strong>Sem IX: Univ., Región y Medio Ambiente (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-gear-wide-connected"></i><strong>Sem IX: Gestión Tecnológica (3 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-file-earmark-text"></i><strong>Sem IX: Escritura Científica (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-stars"></i><strong>Sem IX: Electiva de Profundización I (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-stars"></i><strong>Sem IX: Electiva de Profundización II (4 CR)</strong></div>
+
+              <!-- Semestre 10 -->
+              <div class="chip-item"><i class="bi bi-stars"></i><strong>Sem X: Electiva de Profundización III (4 CR)</strong></div>
+              <div class="chip-item"><i class="bi bi-stars"></i><strong>Sem X: Electiva de Profundización IV (4 CR)</strong></div>
+              <div class="chip-item" style="border-left: 4px solid var(--naranja-acento); background: #fff8f0;"><i class="bi bi-award-fill" style="color: var(--naranja-acento);"></i><strong>Sem X: Opción de Grado (10 CR)</strong></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Perfil del Egresado e Identidad Institucional -->
+  <section id="identidad" class="section-wrap">
+    <div class="container">
+      <div class="section-head">
+        <span class="tag-neon">// IDENTIDAD OFICIAL</span>
+        <h2>Perfil del Egresado y Fundamentos</h2>
+        <p>Alineación curricular con el Proyecto Educativo Institucional (PEI) y la región Amazónica.</p>
+      </div>
+
+      <div class="grid-identity">
+        
+        <!-- Perfil del Egresado Oficial Textual -->
+        <div class="identity-card" style="grid-column: span 2;">
+          <div class="id-icon"><i class="bi bi-person-workspace"></i></div>
+          <h3>Perfil del Egresado</h3>
+          <p style="font-size: 1.05rem; line-height: 1.8; color: var(--texto-oscuro);">
+            "El Ingeniero de Sistemas de la Universidad de la Amazonia es un profesional que comprende las dinámicas del entorno, reconociendo las implicaciones y las responsabilidades legales, profesionales, éticas, sociales, económicas y culturales del ejercicio de su profesión. Así mismo, reconoce que la evolución constante de su disciplina y las condiciones cambiantes del entorno hacen necesario implementar estrategias autónomas de aprendizaje continuo, orientados a su perfeccionamiento profesional."
+          </p>
+        </div>
+
+        <div class="identity-card">
+          <div class="id-icon"><i class="bi bi-compass-fill"></i></div>
+          <h3>Misión del Programa</h3>
+          <p>
+            El programa académico Ingeniería de Sistemas asume como encargo social la formación de profesionales íntegros, con capacidad para crear, innovar, formular y solucionar problemáticas organizacionales y productivas, apoyados en el desarrollo de sistemas de información soportados en las diferentes tecnologías informáticas, con el propósito de contribuir al desarrollo social, económico y tecnológico de la región amazónica y del país.
+          </p>
+        </div>
+
+        <div class="identity-card">
+          <div class="id-icon"><i class="bi bi-eye-fill"></i></div>
+          <h3>Visión del Programa</h3>
+          <p>
+            Ser un programa académico en permanente acreditación académica y social, líder en la formación integral de profesionales competentes en el campo académico, investigativo y humanístico; comprometidos con el desarrollo tecnológico de la región amazónica y del país apoyados en tecnologías de información.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Acordeón Nativo en CSS (<details> y <summary>) -->
+      <div class="accordion-pure">
+        
+        <details class="acc-box" open>
+          <summary class="acc-title">
+            <span><i class="bi bi-file-earmark-ruled-fill text-primary me-2"></i> Marco Normativo del Pensum (Acuerdo 44 de 2020)</span>
+          </summary>
+          <div class="acc-body">
+            <p><strong>Acto Administrativo:</strong> Acuerdo No. 44 del 02 de diciembre de 2020 expedido por el Consejo Académico de la Universidad de la Amazonia.</p>
+            <p><strong>Carga Académica:</strong> 178 créditos presenciales, distribuidos en 10 semestres, incluyendo 10 créditos de Opción de Grado (conforme al Acuerdo No. 019 de 2019 CSU).</p>
+            <p><strong>Resolución Registro Calificado:</strong> Res. 001562 del 16 de febrero de 2022 emitida por el Ministerio de Educación Nacional.</p>
+          </div>
+        </details>
+
+        <details class="acc-box">
+          <summary class="acc-title">
+            <span><i class="bi bi-globe-americas text-success me-2"></i> Políticas de Electivas e Internacionalización</span>
+          </summary>
+          <div class="acc-body">
+            <p>El plan cuenta con cuatro Electivas de Profundización (Semestres IX y X) que fortalecen competencias transversales y específicas. Los estudiantes pueden cursar electivas en otras instituciones de educación superior a nivel nacional o internacional mediante previa aprobación del Comité de Currículo.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Futurista -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="col-brand">
+        <h4>&lt;IS.UNIAMAZONIA /&gt;</h4>
+        <p>Programa de Ingeniería de Sistemas &bull; Facultad de Ingeniería. Universidad de la Amazonia, Florencia, Caquetá.</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Navegación</h5>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#metricas">Ficha Técnica</a></li>
+          <li><a href="#pilares">Campos Formativos</a></li>
+          <li><a href="#malla">Plan de Estudios 2020</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Institucional</h5>
+        <ul>
+          <li><a href="#">Campus Porvenir</a></li>
+          <li><a href="#">Acuerdo No. 44 de 2020</a></li>
+          <li><a href="#">SNIES: 52384</a></li>
+          <li><a href="#">Florencia - Colombia</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>&copy; 2026 Propuesta de Rediseño de Vanguardia &bull; Ingeniería de Sistemas</span>
+      <span style="font-family: var(--font-code);">100% HTML5 Semántico + CSS Grid & Flexbox (Sin JavaScript)</span>
+    </div>
+  </footer>
+<!-- Botón flotante para subir (anclado a #inicio) -->
+<a href="#inicio" class="btn-scroll-top" title="Volver al inicio">
+  <i class="bi bi-chevron-up"></i>
+</a>
+</body>
+</html>
